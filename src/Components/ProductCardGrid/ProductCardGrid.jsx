@@ -6,8 +6,12 @@ import Card from "../../Components/Card/Card";
 const ProductCardGrid = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product);
-  const handleAllToCart = () => {
+  const handleAllCart = () => {
     products.map((pro) => dispatch(addCart(pro)));
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(addCart(product));
   };
   return (
     <div className="max-w-6xl mx-auto mt-[50px]">
@@ -15,7 +19,7 @@ const ProductCardGrid = () => {
         <h1 className=" text-xl">{`Total Products (${products.length})`}</h1>
         <button
           className="font-medium px-10 py-3 bg-transparent border border-gray-400 rounded-sm"
-          onClick={handleAllToCart}
+          onClick={handleAllCart}
         >
           Move All To Cart
         </button>
@@ -29,7 +33,14 @@ const ProductCardGrid = () => {
             ProductName={product.title}
             newPrice={product.newPrice}
             oldPrice={product.oldPrice}
-          />
+          >
+            <button
+              className="font-medium px-10 py-3 bg-transparent border border-gray-400 rounded-sm"
+              onClick={() => handleAddToCart(product)}
+            >
+              Add to Cart
+            </button>
+          </Card>
         ))}
       </div>
     </div>

@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import Button from "../Button/Button";
 import Search from "../../assets/Search.svg";
 import WishListLogo from "../../assets/heart small.svg";
 import CartLogo from "../../assets/Cart.svg";
+import "../../App.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,16 +14,14 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const dispatch = useDispatch();
-  const inputRef = useRef();
   const likes = useSelector((state) => state.like);
   const addToCart = useSelector((state) => state.cart);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 sticky w-full z-30 top-0 left-0 dark:border-gray-600">
-      <div className="max-w-6xl flex flex-wrap items-center justify-between mx-auto p-4 border-b border-gray-200 ">
+    <nav className="bg-white dark:bg-gray-900 sticky w-full z-20 top-0 left-0 dark:border-gray-600 border-b border-gray-200 ">
+      <div className="max-w-6xl flex flex-wrap items-center justify-between mx-auto py-4  ">
         <Link to={"/"}>
-          <h2 className="text-dark">Exclusive</h2>
+          <h2 className="text-black font-bold text-lg pt-2">Exclusive</h2>
         </Link>
         <div className="flex md:order-2">
           <div className="flex space-x-7">
@@ -37,7 +36,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-7">
               <div className=" relative">
                 <Button child={WishListLogo} alt="Heart Icon" width={32} />
-                <p className="bg-[#afb0b1] text-xs rounded-full flex justify-center text-white absolute top-0 right-0 px-1">
+                <p className="bg-[#DB4444] text-xs rounded-full flex justify-center text-white absolute top-0 right-0 px-1">
                   {likes.length}
                 </p>
               </div>
@@ -47,7 +46,7 @@ const Navbar = () => {
                   <Button child={CartLogo} alt="Cart Icon" />
                 </Link>
                 <p
-                  className="bg-[#afb0b1] text-xs rounded-full  flex justify-center text-white absolute 
+                  className="bg-[#DB4444] text-xs rounded-full  flex justify-center text-white absolute 
 top-0 right-0 px-1"
                 >
                   {addToCart.length}
@@ -88,20 +87,24 @@ top-0 right-0 px-1"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <Link
+              <NavLink
                 to={"/"}
-                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                className="block pt-2  text-gray-900  hover:bg-gray-100 md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                activeClassName="active"
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
+
+            {/* Products Link */}
             <li>
-              <Link
+              <NavLink
                 to={"/products"}
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block pt-2  text-gray-900  hover:bg-gray-100 md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                activeClassName="active"
               >
                 Products
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

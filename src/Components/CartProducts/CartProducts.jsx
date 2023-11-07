@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import jsPDF from "jspdf";
 
 const CartPage = () => {
   const cartProducts = useSelector((state) => state.cart);
@@ -8,36 +7,21 @@ const CartPage = () => {
   const handleQuantityChange = (index, newQuantity) => {
     const updatedCart = [...cartProducts];
     updatedCart[index].quantity = newQuantity;
-  };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    doc.text("Cart Details", 10, 10);
-
-    let yOffset = 30;
-
-    cartProducts.forEach((product, index) => {
-      const total = product.newPrice * product.quantity;
-      doc.text(`Product: ${product.title}`, 10, yOffset);
-      doc.text(`Price: $${product.newPrice}`, 10, yOffset + 10);
-      doc.text(`Quantity: ${product.quantity}`, 10, yOffset + 20);
-      doc.text(`Total: $${total}`, 10, yOffset + 30);
-      yOffset += 40;
-    });
-
-    doc.save("cart_details.pdf");
+    // Dispatch an action to update the cart in your Redux store
+    // Assuming you have a Redux action to update the cart
+    // dispatch(updateCart(updatedCart));
   };
 
   return (
     <div className="w-full mt-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex gap-72 px-12">
+        <div className="flex gap-80">
           <h2>Product</h2>
           <h2>Price</h2>
           <h2>Quantity</h2>
           <h2>Total</h2>
         </div>
-
         <div>
           {cartProducts.map((product, index) => (
             <li key={index} className="grid grid-cols-4 gap-4 mt-3 shadow-md">
@@ -46,24 +30,22 @@ const CartPage = () => {
                 <h1 className="ml-2">{product.title}</h1>
               </div>
               <div className="flex items-center ml-20">${product.newPrice}</div>
-              <div className="flex items-center ml-32">
+              <div className="flex items-center">
                 <input
                   type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  className="w-20 border border-gray-800"
+                  value={product.quantity}
+                  onChange={(e) => {
+                    const newQuantity = parseInt(e.target.value, 10);
+                    handleQuantityChange(index, newQuantity);
+                  }}
                 />
               </div>
-              <div className="flex items-center ml-44">
+              <div className="flex items-center ml-20">
                 ${product.newPrice * product.quantity}
               </div>
             </li>
           ))}
         </div>
-      </div>
-
-      <div>
-        <button onClick={generatePDF}>Download PDF</button>
       </div>
     </div>
   );
