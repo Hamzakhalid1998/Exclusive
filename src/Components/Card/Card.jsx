@@ -1,8 +1,9 @@
 import React from "react";
 import Button from "../Button/Button";
 import HeartIcon from "../../assets/heart small.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addLike } from "../../Store/Slices/Like";
+import { addCart } from "../../Store/Slices/AddToCart";
 
 function Card(props) {
   const {
@@ -11,16 +12,21 @@ function Card(props) {
     ProductName,
     oldPrice,
     newPrice,
-    showButton, // New prop to control the button visibility
+    showButton,
   } = props;
   const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.product);
+  // console.log(products);
 
   const handleLikeButton = (name) => {
     dispatch(addLike(name));
   };
 
-  const handleAddToCart = (products) => {
-    products.map((pro) => dispatch(addCart(pro)));
+  const handleAddToCart = (ProductName) => {
+    // console.log(products);
+    const product = products.find((pro) => pro.title == ProductName);
+    dispatch(addCart(product));
   };
 
   return (
@@ -54,7 +60,7 @@ function Card(props) {
       {showButton && (
         <button
           className="bg-[#000000] text-white rounded-sm py-2 px-4 mt-2 w-[280px] mb-5"
-          onClick={handleAddToCart}
+          onClick={() => handleAddToCart(ProductName)}
         >
           Add to Cart
         </button>

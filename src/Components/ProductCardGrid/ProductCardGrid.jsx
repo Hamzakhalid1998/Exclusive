@@ -13,9 +13,9 @@ const ProductCardGrid = () => {
   return (
     <div className="max-w-6xl mx-auto mt-[50px]">
       <div className="flex justify-between items-center">
-        <h1 className=" text-xl">{`Total Products (${products.length})`}</h1>
+        <h1 className=" text-xl">{`Total Products ()`}</h1>
         <button
-          className="font-medium px-10 py-3 bg-transparent border border-gray-400 rounded-sm"
+          className="font-medium px-10 py-3 bg-transparent border border-gray-400 rounded-sm "
           onClick={handleAllCart}
         >
           Move All To Cart

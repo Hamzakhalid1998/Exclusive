@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const CartPage = () => {
   const cartProducts = useSelector((state) => state.cart);
+  console.log(cartProducts);
 
   const handleQuantityChange = (index, newQuantity) => {
     const updatedCart = [...cartProducts];
     updatedCart[index].quantity = newQuantity;
-
-    // Dispatch an action to update the cart in your Redux store
-    // Assuming you have a Redux action to update the cart
-    // dispatch(updateCart(updatedCart));
   };
 
   return (
