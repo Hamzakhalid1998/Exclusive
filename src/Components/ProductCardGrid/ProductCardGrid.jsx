@@ -10,9 +10,6 @@ const ProductCardGrid = () => {
     products.map((pro) => dispatch(addCart(pro)));
   };
 
-  const handleAddToCart = (product) => {
-    dispatch(addCart(product));
-  };
   return (
     <div className="max-w-6xl mx-auto mt-[50px]">
       <div className="flex justify-between items-center">
@@ -33,14 +30,8 @@ const ProductCardGrid = () => {
             ProductName={product.title}
             newPrice={product.newPrice}
             oldPrice={product.oldPrice}
-          >
-            <button
-              className="font-medium px-10 py-3 bg-transparent border border-gray-400 rounded-sm"
-              onClick={() => handleAddToCart(product)}
-            >
-              Add to Cart
-            </button>
-          </Card>
+            showButton={true}
+          />
         ))}
       </div>
     </div>

@@ -1,10 +1,8 @@
 import React from "react";
 import Button from "../Button/Button";
 import HeartIcon from "../../assets/heart small.png";
-import CartIcon from "../../assets/Cart.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addLike } from "../../Store/Slices/Like";
-import { addCart } from "../../Store/Slices/AddToCart";
 
 function Card(props) {
   const {
@@ -13,13 +11,16 @@ function Card(props) {
     ProductName,
     oldPrice,
     newPrice,
-
-    addToCart,
+    showButton, // New prop to control the button visibility
   } = props;
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product);
+
   const handleLikeButton = (name) => {
     dispatch(addLike(name));
+  };
+
+  const handleAddToCart = (products) => {
+    products.map((pro) => dispatch(addCart(pro)));
   };
 
   return (
@@ -34,12 +35,14 @@ function Card(props) {
           ""
         )}
 
-        <Button
-          className="bg-white rounded-full flex items-center p-1 absolute top-2 right-3"
-          child={HeartIcon}
-          alt="Add to Cart"
-          onClick={() => handleLikeButton(ProductName)}
-        />
+        {showButton && (
+          <Button
+            className="bg-white rounded-full flex items-center p-1 absolute top-2 right-3"
+            child={HeartIcon}
+            alt="Add to Cart"
+            onClick={() => handleLikeButton(ProductName)}
+          />
+        )}
       </div>
       <div className="py-2">
         <h1 className=" text-xl font-semibold">{ProductName}</h1>
@@ -48,6 +51,14 @@ function Card(props) {
           <p className="line-through text-[#808080] ">${oldPrice}</p>
         </div>
       </div>
+      {showButton && (
+        <button
+          className="bg-[#000000] text-white rounded-sm py-2 px-4 mt-2 w-[280px] mb-5"
+          onClick={handleAddToCart}
+        >
+          Add to Cart
+        </button>
+      )}
     </div>
   );
 }
