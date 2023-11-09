@@ -1,5 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { removeAll } from "../../Store/Slices/AddToCart";
 
 const CartPage = () => {
   const cartProducts = useSelector((state) => state.cart);
@@ -8,6 +10,10 @@ const CartPage = () => {
   const handleQuantityChange = (index, newQuantity) => {
     const updatedCart = [...cartProducts];
     updatedCart[index].quantity = newQuantity;
+  };
+  const dispatch = useDispatch();
+  const handleRemoveAll = () => {
+    dispatch(removeAll());
   };
 
   return (
@@ -27,21 +33,35 @@ const CartPage = () => {
                 <h1 className="ml-2">{product.title}</h1>
               </div>
               <div className="flex items-center ml-20">${product.newPrice}</div>
-              <div className="flex items-center">
+              <div className="flex items-center ml-36">
                 <input
                   type="number"
                   value={product.quantity}
+                  className="border border-gray-300 w-14"
                   onChange={(e) => {
                     const newQuantity = parseInt(e.target.value, 10);
                     handleQuantityChange(index, newQuantity);
                   }}
                 />
               </div>
-              <div className="flex items-center ml-20">
+              <div className="flex items-center ml-56">
                 ${product.newPrice * product.quantity}
               </div>
             </li>
           ))}
+        </div>
+        <div className="flex  justify-between mt-5">
+          <Link to={"/Products"}>
+            <button className="border border-[1px solid rgba(0, 0, 0, 0.50)] p-2">
+              Return To Products
+            </button>
+          </Link>
+          <button
+            className="border border-[1px solid rgba(0, 0, 0, 0.50)] p-2"
+            onClick={handleRemoveAll}
+          >
+            Remove All
+          </button>
         </div>
       </div>
     </div>
