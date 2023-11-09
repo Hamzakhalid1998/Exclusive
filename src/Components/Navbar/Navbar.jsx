@@ -19,6 +19,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white dark:bg-gray-900 sticky w-full z-20 top-0 left-0 dark:border-gray-600 border-b border-gray-200 ">
+      <div className="bg-black h-12">a</div>
       <div className="max-w-6xl flex flex-wrap items-center justify-between mx-auto py-4  ">
         <Link to={"/"}>
           <h2 className="text-black font-bold text-lg pt-2">Exclusive</h2>

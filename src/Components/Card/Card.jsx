@@ -13,6 +13,7 @@ function Card(props) {
     oldPrice,
     newPrice,
     showButton,
+    showPercentage,
   } = props;
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ function Card(props) {
 
   return (
     <div>
-      <div className="w-[280px] h-[240px] flex justify-center items-center bg-[#F5F5F5] relative">
+      <div className="w-[17.5rem] h-[15rem] flex justify-center items-center bg-[#F5F5F5] relative">
         <img src={productImg} alt="" className="bg-[#F5F5F5]" />
         {productDiscount > 0 ? (
           <p className="bg-[#DB4444] py-1 px-2 rounded-md text-white absolute top-2 left-3">
@@ -41,14 +42,12 @@ function Card(props) {
           ""
         )}
 
-        {showButton && (
-          <Button
-            className="bg-white rounded-full flex items-center p-1 absolute top-2 right-3"
-            child={HeartIcon}
-            alt="Add to Cart"
-            onClick={() => handleLikeButton(ProductName)}
-          />
-        )}
+        <Button
+          className="bg-white rounded-full flex items-center p-1 absolute top-2 right-3"
+          child={HeartIcon}
+          alt="Add to Cart"
+          onClick={() => handleLikeButton(ProductName)}
+        />
       </div>
       <div className="py-2">
         <h1 className=" text-xl font-semibold">{ProductName}</h1>

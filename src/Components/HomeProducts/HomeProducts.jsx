@@ -11,7 +11,7 @@ const HomeProducts = () => {
   return (
     <div className="w-full mt-10 flex justify-center">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-4 gap-4 justify-center items-center">
+        <div className="grid md:grid-cols-4 gap-4 justify-center items-center">
           {ProductDetails.map((product, index) => (
             <Card
               key={index}
