@@ -13,7 +13,6 @@ function Card(props) {
     oldPrice,
     newPrice,
     showButton,
-    showPercentage,
   } = props;
   const dispatch = useDispatch();
 
@@ -25,7 +24,6 @@ function Card(props) {
   };
 
   const handleAddToCart = (ProductName) => {
-    // console.log(products);
     const product = products.find((pro) => pro.title == ProductName);
     dispatch(addCart(product));
   };

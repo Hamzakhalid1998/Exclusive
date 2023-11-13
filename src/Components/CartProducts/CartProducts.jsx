@@ -2,16 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeAll } from "../../Store/Slices/AddToCart";
-
+// import updateQuantity from '../../Store/Slices/Total'
 const CartPage = () => {
   const cartProducts = useSelector((state) => state.cart);
   console.log(cartProducts);
 
-  const handleQuantityChange = (index, newQuantity) => {
-    const updatedCart = [...cartProducts];
-    updatedCart[index].quantity = newQuantity;
-  };
   const dispatch = useDispatch();
+
+  const handleQuantityChange = (index, newQuantity) => {
+    // Dispatch the action to update the quantity in the Redux store
+    dispatch(
+      updateQuantity({ productId: cartProducts[index].id, newQuantity })
+    );
+  };
+
   const handleRemoveAll = () => {
     dispatch(removeAll());
   };
@@ -50,7 +54,7 @@ const CartPage = () => {
             </li>
           ))}
         </div>
-        <div className="flex  justify-between mt-5">
+        <div className="flex justify-between mt-5">
           <Link to={"/Products"}>
             <button className="border border-[1px solid rgba(0, 0, 0, 0.50)] p-2">
               Return To Products

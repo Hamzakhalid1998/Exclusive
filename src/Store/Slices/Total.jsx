@@ -1,6 +1,5 @@
-// In your Redux reducer file (e.g., cartReducer.js)
 const initialState = {
-  cart: [], // Your cart state
+  cart: [],
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -19,7 +18,6 @@ const cartReducer = (state = initialState, action) => {
           return product;
         }),
       };
-    // Other case statements for your existing actions
 
     default:
       return state;
